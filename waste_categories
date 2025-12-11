@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS waste_categories (
+  category_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  category_name VARCHAR(80) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  recyclable TINYINT(1) NOT NULL COMMENT '1 = recyclable, 0 = non-recyclable',
+  UNIQUE KEY ux_category_name (category_name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO waste_categories (category_name, description, recyclable)
+VALUES
+('Paper', 'Newspapers, books, office paper and cardboard from offices and households', 1),
+('Plastic', 'PET bottles, containers, polythene sacks and packaging plastics', 1),
+('Glass', 'Bottles, jars, glass sheets and broken glass from households and industry', 1),
+('Metal', 'Aluminum cans, iron scraps, copper wires and steel parts', 1),
+('Organic', 'Food waste, garden waste, market organic residues', 1),
+('E-Waste', 'Mobile phones, batteries, circuit boards and small electronics', 1),
+('Textile', 'Clothing, fabric scraps, offcuts from garment factories', 1),
+('Wood Waste', 'Furniture scraps, pallets, sawdust and construction wood', 1),
+('Rubber', 'Old tyres, rubber scraps and rubber offcuts', 1),
+('Mixed Waste', 'Unsorted municipal waste; contains non-recyclable fractions', 0);
