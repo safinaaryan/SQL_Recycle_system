@@ -1,0 +1,33 @@
+CREATE TABLE IF NOT EXISTS worker_assignments (
+  assignment_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  worker_id INT NOT NULL,
+  category_id INT NOT NULL,
+  task_description VARCHAR(255) NOT NULL,
+  assigned_date DATE NOT NULL,
+  completion_date DATE NOT NULL,
+  status VARCHAR(50) NOT NULL,
+  KEY idx_assignment_worker (worker_id),
+  KEY idx_assignment_category (category_id),
+  CONSTRAINT fk_assignment_worker FOREIGN KEY (worker_id)
+    REFERENCES workers(worker_id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT,
+  CONSTRAINT fk_assignment_category FOREIGN KEY (category_id)
+    REFERENCES waste_categories(category_id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO worker_assignments
+(worker_id, category_id, task_description, assigned_date, completion_date, status)
+VALUES
+(1, 1, 'Sort and prepare office paper for pulping', '2025-10-05', '2025-10-06', 'Completed'),
+(2, 2, 'Supervise plastic bottle segregation by resin type', '2025-10-05', '2025-10-06', 'Completed'),
+(3, 3, 'Assist glass crushing and remove contaminants', '2025-10-07', '2025-10-07', 'Completed'),
+(4, 4, 'Operate induction furnace for metal melting', '2025-10-08', '2025-10-09', 'Completed'),
+(5, 5, 'Monitor aerobic composting turned piles', '2025-10-09', '2025-10-16', 'In Progress'),
+(6, 6, 'Label and dismantle small e-waste units', '2025-10-10', '2025-10-11', 'Completed'),
+(7, 7, 'Feed textile sorter and monitor fiber quality', '2025-10-11', '2025-10-12', 'Completed'),
+(8, 8, 'Run wood chipper and supervise drying', '2025-10-12', '2025-10-13', 'Completed'),
+(9, 9, 'Operate tyre granulator and screen granules', '2025-10-13', '2025-10-14', 'Completed'),
+(10, 10, 'Manual sorting line — separate recyclables', '2025-10-14', '2025-10-15', 'Completed');
