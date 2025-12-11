@@ -1,0 +1,31 @@
+CREATE TABLE IF NOT EXISTS environmental_reports (
+  report_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  center_id INT NOT NULL,
+  report_date DATE NOT NULL,
+  total_waste_processed_kg DECIMAL(12,2) NOT NULL,
+  total_products_generated_kg DECIMAL(12,2) NOT NULL,
+  co2_reduction_kg DECIMAL(12,2) NOT NULL,
+  energy_saved_kwh DECIMAL(12,2) NOT NULL,
+  water_saved_liters DECIMAL(12,2) NOT NULL,
+  remarks TEXT NOT NULL,
+  prepared_by VARCHAR(100) NOT NULL,
+  KEY idx_report_center (center_id),
+  CONSTRAINT fk_report_center FOREIGN KEY (center_id)
+    REFERENCES recycling_centers(center_id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO environmental_reports
+(center_id, report_date, total_waste_processed_kg, total_products_generated_kg, co2_reduction_kg, energy_saved_kwh, water_saved_liters, remarks, prepared_by)
+VALUES
+(1, '2025-10-25', 48050.00, 950.00, 1250.00, 450.00, 1200.00, 'Reduced landfill usage by 12% for Dhaka North region.', 'Md. Kamrul Hasan'),
+(2, '2025-10-25', 62000.00, 1800.00, 1500.00, 520.00, 900.00, 'High plastic recovery rate; energy efficiency improved.', 'Farhana Akter Juthi'),
+(3, '2025-10-25', 34075.00, 750.00, 980.00, 200.00, 400.00, 'Glass reuse increased local bottle supply.', 'Abdul Karim Sarder'),
+(4, '2025-10-25', 29500.00, 680.00, 850.00, 180.00, 320.00, 'Metal yields increased after process tuning.', 'Nasrin Sultana'),
+(5, '2025-10-25', 52000.00, 920.00, 1100.00, 140.00, 5000.00, 'Compost distributed to local farms and nurseries.', 'Mahbubur Rahman'),
+(6, '2025-10-25', 90000.00, 610.00, 1750.00, 900.00, 300.00, 'Gazipur plant handled large industrial flows.', 'Sultana Yasmin'),
+(7, '2025-10-25', 36000.00, 500.00, 970.00, 160.00, 250.00, 'Textile re-use supports garment units.', 'Khaled Mahmud'),
+(8, '2025-10-25', 21000.00, 430.00, 880.00, 150.00, 800.00, 'Wood fiber boards reduced timber demand.', 'Rumana Begum'),
+(9, '2025-10-25', 28000.00, 520.00, 940.00, 175.00, 200.00, 'Rubber granules used in playground surfacing.', 'Shafiqul Alam'),
+(10, '2025-10-25', 45000.00, 310.00, 1000.00, 210.00, 1000.00, 'Mixed waste sorting improved recycling ratio by 9%.', 'Asma Akter');
