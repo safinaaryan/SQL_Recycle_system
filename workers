@@ -1,0 +1,33 @@
+CREATE TABLE IF NOT EXISTS workers (
+  worker_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  worker_name VARCHAR(120) NOT NULL,
+  center_id INT NOT NULL,
+  job_role VARCHAR(80) NOT NULL,
+  shift_info VARCHAR(50) NOT NULL,
+  join_date DATE NOT NULL,
+  salary DECIMAL(10,2) NOT NULL,
+  contact_number VARCHAR(20) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  KEY idx_workers_center (center_id),
+  CONSTRAINT fk_workers_center FOREIGN KEY (center_id)
+    REFERENCES recycling_centers(center_id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO workers
+(worker_name, center_id, job_role, shift_info, join_date, salary, contact_number, email)
+VALUES
+('Rafiq Uddin', 1, 'Sorter', 'Morning (06:00-14:00)', '2017-03-15', 12500.00, '01711110001', 'rafiq@greenloop.bd'),
+('Sadia Khatun', 1, 'Processor', 'Evening (14:00-22:00)', '2018-07-01', 14000.00, '01711110002', 'sadia@greenloop.bd'),
+('Monir Hossain', 2, 'Loader', 'Night (22:00-06:00)', '2019-01-10', 11000.00, '01722220003', 'monir@greenloop.bd'),
+('Sumon Ali', 2, 'Operator', 'Morning (06:00-14:00)', '2016-05-20', 15000.00, '01722220004', 'sumon@greenloop.bd'),
+('Fatema Begum', 3, 'Quality Checker', 'Evening (14:00-22:00)', '2020-08-02', 16000.00, '01633330005', 'fatema@greenloop.bd'),
+('Shakil Ahmed', 4, 'Sorter', 'Night (22:00-06:00)', '2015-11-12', 12500.00, '01544440006', 'shakil@greenloop.bd'),
+('Jannat Jahan', 5, 'Processor', 'Morning (06:00-14:00)', '2019-09-05', 14000.00, '01755550007', 'jannat@greenloop.bd'),
+('Kawsar Mia', 6, 'Machine Operator', 'Evening (14:00-22:00)', '2020-02-28', 15500.00, '01866660008', 'kawsar@greenloop.bd'),
+('Nazrul Islam', 7, 'Supervisor', 'Morning (06:00-14:00)', '2014-06-18', 22000.00, '01777770009', 'nazrul@greenloop.bd'),
+('Tania Rahman', 8, 'Data Recorder', 'Evening (14:00-22:00)', '2018-12-03', 13000.00, '01888880010', 'tania@greenloop.bd'),
+('Rashedul Hasan', 9, 'Transport Coordinator', 'Night (22:00-06:00)', '2017-04-25', 17000.00, '01799990011', 'rashedul@greenloop.bd'),
+('Samira Islam', 10, 'Quality Checker', 'Morning (06:00-14:00)', '2021-01-15', 15000.00, '01610001012', 'samira@greenloop.bd');
+
