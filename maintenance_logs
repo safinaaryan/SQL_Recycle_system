@@ -1,0 +1,29 @@
+CREATE TABLE IF NOT EXISTS maintenance_logs (
+  log_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  center_id INT NOT NULL,
+  equipment_name VARCHAR(150) NOT NULL,
+  maintenance_date DATE NOT NULL,
+  performed_by VARCHAR(100) NOT NULL,
+  issue_found VARCHAR(255) NOT NULL,
+  maintenance_status VARCHAR(50) NOT NULL,
+  next_due_date DATE NOT NULL,
+  KEY idx_maintenance_center (center_id),
+  CONSTRAINT fk_maintenance_center FOREIGN KEY (center_id)
+    REFERENCES recycling_centers(center_id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO maintenance_logs
+(center_id, equipment_name, maintenance_date, performed_by, issue_found, maintenance_status, next_due_date)
+VALUES
+(1, 'Paper Pulping Tank', '2025-10-18', 'Engr. Al Amin', 'Worn seals; replaced', 'Completed', '2026-04-18'),
+(2, 'Plastic Extruder #2', '2025-10-19', 'Tech. Shahid', 'Nozzle blockage cleared', 'Completed', '2026-01-19'),
+(3, 'Glass Furnace A', '2025-10-20', 'Engr. Hasan Kabir', 'Thermocouple recalibrated', 'Completed', '2026-04-20'),
+(4, 'Induction Furnace', '2025-10-17', 'Engr. Tanvir Ahmed', 'Cooling pump serviced', 'Completed', '2026-04-17'),
+(5, 'Compost Turner', '2025-10-16', 'Technician Mahin', 'Bearing replacement', 'Completed', '2026-01-16'),
+(6, 'E-waste Shredder', '2025-10-18', 'Engr. Rafiqur Rahman', 'Blade worn — replaced', 'Completed', '2026-04-18'),
+(7, 'Fiberizer Unit', '2025-10-18', 'Dr. Sabiha Sultana', 'Feed hopper alignment', 'Completed', '2026-04-18'),
+(8, 'Wood Press', '2025-10-19', 'Engr. Masud Rana', 'Hydraulic leak fixed', 'Completed', '2026-01-19'),
+(9, 'Tyre Granulator', '2025-10-20', 'Engr. Sharmin Akter', 'Rotor balancing performed', 'Completed', '2026-04-20'),
+(10, 'Sorting Conveyor', '2025-10-21', 'Dr. Fariha Islam', 'Motor control board replaced', 'Completed', '2026-04-21');
