@@ -1,0 +1,32 @@
+CREATE TABLE IF NOT EXISTS processing_results (
+  result_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  operation_id INT NOT NULL,
+  product_id INT NOT NULL,
+  processed_quantity DECIMAL(12,2) NOT NULL,
+  processing_date DATE NOT NULL,
+  efficiency_percent DECIMAL(5,2) NOT NULL,
+  KEY idx_result_operation (operation_id),
+  KEY idx_result_product (product_id),
+  CONSTRAINT fk_result_operation FOREIGN KEY (operation_id)
+    REFERENCES processing_operations(operation_id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT,
+  CONSTRAINT fk_result_product FOREIGN KEY (product_id)
+    REFERENCES recycled_products(product_id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO processing_results
+(operation_id, product_id, processed_quantity, processing_date, efficiency_percent)
+VALUES
+(1, 1, 950.00, '2025-10-16', 94.00),
+(2, 2, 1800.00, '2025-10-17', 92.50),
+(3, 3, 750.00, '2025-10-18', 95.00),
+(4, 4, 680.00, '2025-10-19', 96.00),
+(5, 5, 920.00, '2025-10-20', 88.00),
+(6, 6, 610.00, '2025-10-21', 90.00),
+(7, 7, 500.00, '2025-10-22', 92.00),
+(8, 8, 430.00, '2025-10-23', 89.50),
+(9, 9, 520.00, '2025-10-24', 91.00),
+(10, 10, 310.00, '2025-10-25', 85.00);
