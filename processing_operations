@@ -1,0 +1,28 @@
+CREATE TABLE IF NOT EXISTS processing_operations (
+  operation_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  category_id INT NOT NULL,
+  process_steps TEXT NOT NULL,
+  equipment_used VARCHAR(200) NOT NULL,
+  duration_hours DECIMAL(6,2) NOT NULL,
+  energy_used_kwh DECIMAL(10,2) NOT NULL,
+  waste_loss_percent DECIMAL(5,2) NOT NULL,
+  KEY idx_operation_category (category_id),
+  CONSTRAINT fk_operation_category FOREIGN KEY (category_id)
+    REFERENCES waste_categories(category_id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO processing_operations
+(category_id, process_steps, equipment_used, duration_hours, energy_used_kwh, waste_loss_percent)
+VALUES
+(1, 'Shredding -> Pulping -> Drying', 'Paper Shredder, Pulping Tank, Industrial Dryer', 6.50, 45.00, 6.00),
+(2, 'Cleaning -> Melting -> Extrusion', 'Wash Line, Extruder, Pelletizer', 8.00, 120.00, 7.50),
+(3, 'Crushing -> Melting -> Molding', 'Crusher, Glass Furnace, Molder', 10.00, 220.00, 5.00),
+(4, 'Sorting -> Melting -> Casting', 'Magnetic Separator, Induction Furnace', 9.00, 310.00, 4.50),
+(5, 'Pre-sort -> Composting -> Curing', 'Compost Bins, Turner, Curing Bed', 72.00, 15.00, 12.00),
+(6, 'Dismantle -> Separation -> Metal Recovery', 'E-waste Shredder, Smelter', 12.00, 180.00, 10.00),
+(7, 'Sorting -> Fiberizing -> Reweaving', 'Textile Sorter, Fiberizer', 9.50, 130.00, 8.00),
+(8, 'Chipping -> Drying -> Compression', 'Wood Chipper, Dryer, Press', 9.00, 55.00, 9.00),
+(9, 'Shredding -> Screening -> Granulation', 'Tyre Shredder, Granulator', 6.50, 95.00, 11.00),
+(10, 'Primary Sorting -> Secondary Separation', 'Belt Sorter, Manual Stations', 5.00, 35.00, 15.00);
