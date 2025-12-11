@@ -1,0 +1,33 @@
+CREATE TABLE IF NOT EXISTS collection_records (
+  collection_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  center_id INT NOT NULL,
+  category_id INT NOT NULL,
+  collection_date DATE NOT NULL,
+  collected_weight_kg DECIMAL(10,2) NOT NULL,
+  collected_by VARCHAR(150) NOT NULL,
+  transport_method VARCHAR(60) NOT NULL,
+  KEY idx_collection_center (center_id),
+  KEY idx_collection_category (category_id),
+  CONSTRAINT fk_collection_center FOREIGN KEY (center_id)
+    REFERENCES recycling_centers(center_id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT,
+  CONSTRAINT fk_collection_category FOREIGN KEY (category_id)
+    REFERENCES waste_categories(category_id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO collection_records
+(center_id, category_id, collection_date, collected_weight_kg, collected_by, transport_method)
+VALUES
+(1, 2, '2025-10-05', 480.50, 'Union Collection Team - Gabtoli', 'Truck'),
+(2, 4, '2025-10-06', 620.00, 'Port Area Pickup', 'Mini Truck'),
+(3, 3, '2025-10-07', 340.75, 'Khulna City Sweepers', 'Truck'),
+(4, 4, '2025-10-08', 295.00, 'Rajshahi Industrial Pickup', 'Pickup Van'),
+(5, 5, '2025-10-09', 520.00, 'Sylhet Municipality', 'Truck'),
+(6, 2, '2025-10-10', 900.00, 'Gazipur Factories', 'Truck'),
+(7, 7, '2025-10-11', 360.00, 'Cumilla Textile Collectors', 'Mini Truck'),
+(8, 8, '2025-10-12', 210.00, 'Barishal Carpentry Collection', 'Van'),
+(9, 9, '2025-10-13', 280.00, 'Rangpur Tire Shops', 'Truck'),
+(10, 10, '2025-10-14', 450.00, 'Mymensingh Mixed Collections', 'Pickup Van');
