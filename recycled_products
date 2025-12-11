@@ -1,0 +1,28 @@
+CREATE TABLE IF NOT EXISTS recycled_products (
+  product_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  category_id INT NOT NULL,
+  product_type VARCHAR(150) NOT NULL,
+  quantity_output DECIMAL(10,2) NOT NULL,
+  unit VARCHAR(20) NOT NULL,
+  quality_grade VARCHAR(20) NOT NULL,
+  production_date DATE NOT NULL,
+  KEY idx_product_category (category_id),
+  CONSTRAINT fk_product_category FOREIGN KEY (category_id)
+    REFERENCES waste_categories(category_id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO recycled_products
+(category_id, product_type, quantity_output, unit, quality_grade, production_date)
+VALUES
+(1, 'Recycled Paper Sheets', 950.00, 'kg', 'High', '2025-10-16'),
+(2, 'Plastic Pellets (PET)', 1800.00, 'kg', 'High', '2025-10-17'),
+(3, 'Refurbished Glass Bottles', 750.00, 'kg', 'High', '2025-10-18'),
+(4, 'Aluminum Rods', 680.00, 'kg', 'High', '2025-10-19'),
+(5, 'Organic Compost Fertilizer', 920.00, 'kg', 'High', '2025-10-20'),
+(6, 'Recovered Copper Wires', 610.00, 'kg', 'Medium', '2025-10-21'),
+(7, 'Recycled Textile Yarn', 500.00, 'kg', 'High', '2025-10-22'),
+(8, 'Eco Wood Boards', 430.00, 'kg', 'Medium', '2025-10-23'),
+(9, 'Rubber Granules', 520.00, 'kg', 'Medium', '2025-10-24'),
+(10, 'Sorted Recyclables Mixed', 310.00, 'kg', 'Low', '2025-10-25');
